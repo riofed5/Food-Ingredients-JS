@@ -48,16 +48,15 @@ export default class Recipe{
             const unitIndex= arrIng.findIndex(el2 => units.includes(el2));
 
             let objIng;
+            let count;
             if(unitIndex > -1){
                 const arrCount= arrIng.slice(0, unitIndex);
-
-                let count;
+            
                 if(arrCount.length===1){
                     count = eval(arrIng[0].replace('-','+'));
                 }else{
                     count = eval(arrIng.slice(0,unitIndex).join('+'));
                 } 
-
                 objIng={
                     count,
                     unit: arrIng[unitIndex],
@@ -89,15 +88,12 @@ export default class Recipe{
 
     updateServings(type){
         //Serving
-        const newServing= (type === 'dec') ? this.servings -1 : this.servings+1;
+        const newServings= (type === 'dec') ? this.servings -1 : this.servings +1;
+        // Ingredients
+        this.ingredients.forEach(ing => {
+            ing.count *= (newServings / this.servings);
+        });
 
-        //Ingredient
-
-        this.ingredients.forEach(ing=>{
-            ing.count= ing.count*(newServing/this.servings);
-
-        })
-
-        this.servings= newServing; 
+        this.servings = newServings;
     }
 }
