@@ -127,7 +127,6 @@ const controlList=()=>{
 /**
  * LIKES CONTROLLER
 */
-state.likes= new Likes();
 const controlLikes= ()=>{
 
     if(!state.likes) state.likes= new Likes();
@@ -155,6 +154,27 @@ const controlLikes= ()=>{
     LikesView.toggleLikeMenu(state.likes.getNumLikes());
     
 }
+
+// Restore liked recipes when page loads
+
+window.addEventListener('load',()=>{
+    state.likes= new Likes();
+
+    //Restore Like
+    state.likes.readStrorage();
+
+
+    //Toggle the like button
+    LikesView.toggleLikeMenu(state.likes.getNumLikes());
+
+    //Render the existing likes
+    state.likes.likes.forEach( like=>{
+        LikesView.renderLikes(like);
+    });
+
+})
+
+
 //Handling the button servings click
 
 element.recipe.addEventListener('click',e=>{
