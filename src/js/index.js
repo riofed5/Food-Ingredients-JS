@@ -16,7 +16,6 @@ import {element,renderLoader,clearLoader} from './view/base';
  */
 const state={};
 
-
 /**
  * SEARCH CONTROLLER
 */
@@ -120,7 +119,6 @@ const controlList=()=>{
         ListView.renderItem(item);
     })
 };
-
 
 
 
